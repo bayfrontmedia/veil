@@ -109,7 +109,7 @@ class Veil
     /**
      * Get view from a file as a string
      *
-     * @param string $file (Path to file (excluding file extension) from base path)
+     * @param string $file (Path to file from base path, excluding file extension)
      * @param array $data (Data to pass to view in dot notation)
      * @param bool $minify (Minify compiled HTML?)
      *
@@ -138,7 +138,7 @@ class Veil
     /**
      * Echo view from a file
      *
-     * @param string $file (Path to file (excluding file extension) from base path)
+     * @param string $file (Path to file from base path, excluding file extension)
      * @param array $data (Data to pass to view in dot notation)
      * @param bool $minify (Minify compiled HTML?)
      *

@@ -61,15 +61,15 @@ The following template tags can be used in HTML and view files:
 | Tag | Function
 | --- | --- |
 | `@use:path/from/root` | Adds contents of another file |
-| `@inject:type` | Injects content |
+| `@inject:type` | Injects content (see [inject](#inject)) |
 | `{{-- Comment —-}}` | Everything inside comment tags will be ignored and removed |
-| `{{parameter.name}}` | Replaced with escaped value of from the `$data` array in dot notation |
+| `{{parameter.name}}` | Replaced with escaped value from the `$data` array in dot notation |
 | `{{!parameter.name}}` | Replaced with unescaped (raw) value from the `$data` array in dot notation |
 
 **Raw PHP**
 
 View files can directly access the `$data` array in dot notation.
-In fact, any other PHP code can be directly embedded from any view file.
+In fact, any other PHP code can be directly embedded in any view file.
 However, this should be kept to simple tasks such as performing loop iterations.
 Frequently embedding raw PHP from your view may be a sign you have too much logic within the template.
 
@@ -91,7 +91,7 @@ Frequently embedding raw PHP from your view may be a sign you have too much logi
 
 Add injectable(s) by their respective types.
 
-Default injectable types include:
+Default injectable types to use in your templates include:
 
 - `css`: Wraps content into a CSS `<link>` element
 - `js`: Wraps content into a `<script>` element
@@ -100,7 +100,7 @@ Default injectable types include:
 
 In addition to the default injectable types, custom types can be added and used.
 
-NOTE: If `$content` is an array, all injectables will share the same priority.
+**NOTE:** If `$content` is an array, all injectables will share the same priority.
 
 **Parameters:**
 
@@ -118,7 +118,11 @@ NOTE: If `$content` is an array, all injectables will share the same priority.
 $veil->inject('js', 'javascript-file.js');
 ```
 
-Using the above example, whenever the `@inject:js` template tag appears, it will be replaced with `<script src="javascript-file.js"></script>`.
+Using the above example, whenever the `@inject:js` template tag appears, it will be replaced with:
+
+```
+<script src="javascript-file.js"></script>
+```
 
 <hr />
 
@@ -210,7 +214,7 @@ Get view from a file as a string.
 
 **Parameters:**
 
-- `$file` (string): Path to file (excluding file extension) from base path
+- `$file` (string): Path to file from base path, excluding file extension
 - `$data = []` (array): Data to pass to view in dot notation
 - `$minify = false` (bool): Minify compiled HTML? See [minify](#minify) for more info.
 
@@ -248,7 +252,7 @@ Echo view from a file.
 
 **Parameters:**
 
-- `$file` (string): Path to file (excluding file extension) from base path
+- `$file` (string): Path to file from base path, excluding file extension
 - `$data = []` (array): Data to pass to view in dot notation
 - `$minify = false` (bool): Minify compiled HTML? See [minify](#minify) for more info.
 
@@ -286,7 +290,8 @@ Minify HTML.
 
 Currently, Veil uses [Tiny Html Minifier](https://github.com/pfaciana/tiny-html-minifier) for this method.
 
-**NOTE:** In some cases, HTML may not minify correctly, so use with caution. It is recommended you test this with your HTML/templates before using in production.
+**NOTE:** In some cases, HTML may not minify correctly, so use with caution.
+It is recommended you test this with your HTML and views before using in production.
 
 **Parameters:**
 
@@ -312,7 +317,7 @@ Currently, Veil uses [Parsedown](https://github.com/erusev/parsedown) for this m
 
 **Parameters:**
 
-- `$html` (string)
+- `$markdown` (string)
 
 **Returns:**
 
