@@ -1,0 +1,41 @@
+{
+  "name": "bayfrontmedia/veil",
+  "description": "A fast, lightweight, framework agnostic PHP template engine.",
+  "homepage": "https://github.com/bayfrontmedia/veil",
+  "license" : "MIT",
+  "version": "1.0.0",
+  "type": "library",
+  "keywords": [
+    "php",
+    "template",
+    "engine",
+    "view",
+    "html"
+  ],
+  "authors": [
+    {
+      "name": "John Robinson",
+      "email": "john@bayfrontmedia.com",
+      "homepage": "https://www.bayfrontmedia.com",
+      "role": "Developer"
+    }
+  ],
+  "funding": [
+    {
+      "type": "patreon",
+      "url": "https://www.patreon.com/bayfrontmedia"
+    }
+  ],
+  "require": {
+    "php": ">=7.1.0",
+    "bayfrontmedia/php-array-helpers": "^1.0.0",
+    "bayfrontmedia/php-sanitize": "^1.0.0",
+    "erusev/parsedown": "^1.7.4",
+    "pfaciana/tiny-html-minifier": "*"
+  },
+  "autoload": {
+    "psr-4": {
+      "Bayfront\\Veil\\": "src/"
+    }
+  }
+}
