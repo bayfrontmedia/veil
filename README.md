@@ -231,7 +231,7 @@ Get view from a file as a string.
 ```
 try {
 
-    $html = $veil->getView('/path/to/file`, ['name' => 'John']);
+    $html = $veil->getView('/path/to/file', ['name' => 'John']);
 
 } catch (FileNotFoundException $e) {
 
@@ -258,7 +258,7 @@ Echo view from a file.
 
 **Returns:**
 
-- (string)
+- (void)
 
 **Throws:**
 
@@ -269,7 +269,7 @@ Echo view from a file.
 ```
 try {
 
-    $veil->view('/path/to/file`, ['name' => 'John']);
+    $veil->view('/path/to/file', ['name' => 'John']);
 
 } catch (FileNotFoundException $e) {
 
