@@ -61,7 +61,7 @@ The following template tags can be used in HTML and view files:
 | Tag | Function
 | --- | --- |
 | `@use:path/from/root` | Adds contents of another file |
-| `@markdown:path/from/root` | Adds markdown of another file as HTML |
+| `@markdown:path/from/root` | Adds markdown of another file as HTML (see [markdown](#markdown)) |
 | `@inject:type` | Injects content (see [inject](#inject)) |
 | `{{-- Comment —-}}` | Everything inside comment tags will be ignored and removed |
 | `{{parameter.name}}` | Replaced with escaped value from the `$data` array in dot notation |
@@ -211,7 +211,7 @@ try {
 
 **Description:**
 
-Get view from a file as a string.
+Get compiled template file as a string.
 
 **Parameters:**
 
@@ -249,7 +249,7 @@ try {
 
 **Description:**
 
-Echo view from a file.
+Echo compiled template file.
 
 **Parameters:**
 

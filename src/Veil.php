@@ -107,7 +107,7 @@ class Veil
     }
 
     /**
-     * Get view from a file as a string
+     * Get compiled template file as a string
      *
      * @param string $file (Path to file from base path, excluding file extension)
      * @param array $data (Data to pass to view in dot notation)
@@ -136,7 +136,7 @@ class Veil
     }
 
     /**
-     * Echo view from a file
+     * Echo compiled template file
      *
      * @param string $file (Path to file from base path, excluding file extension)
      * @param array $data (Data to pass to view in dot notation)
