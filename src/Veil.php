@@ -257,6 +257,35 @@ class Veil
 
         }
 
+        // -------------------- Tag: @markdown: --------------------
+
+        preg_match_all("/@markdown:\S+/", $html, $tags); // Any non-whitespace
+
+        if (isset($tags[0]) && !empty($tags[0])) { // If a tag was found
+
+            foreach ($tags[0] as $tag) {
+
+                $use = explode(':', $tag, 2);
+
+                if (isset($use[1])) { // If valid @markdown syntax
+
+                    $file = $this->_requireToVar($this->options['base_path'] . '/' . ltrim($use[1], '/') . $this->options['file_extension'], $data);
+
+                    $tag = str_replace('/', '\/', $tag); // Escape forward slashes
+
+                    $html = preg_replace("/" . $tag . "\b/i", $this->markdown($file), $html); // Replace tag
+
+                }
+            }
+
+            /*
+             * Keep looping until no more @use: tags exist (nested files)
+             */
+
+            $html = $this->_processTemplateTags($html, $data);
+
+        }
+
         // -------------------- Tag: @inject: --------------------
 
         foreach ($this->injectables as $type => $inject) {
