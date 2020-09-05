@@ -76,6 +76,8 @@ Frequently embedding raw PHP from your view may be a sign you have too much logi
 
 ### Public methods
 
+- [getBasePath](#getbasepath)
+- [setBasePath](#setbasepath)
 - [inject](#inject)
 - [getHtml](#gethtml)
 - [html](#html)
@@ -83,6 +85,38 @@ Frequently embedding raw PHP from your view may be a sign you have too much logi
 - [view](#view)
 - [minify](#minify)
 - [markdown](#markdown)
+
+<hr />
+
+### getBasePath
+
+**Description:**
+
+Returns base path.
+
+**Parameters:**
+
+- (None)
+
+**Returns:**
+
+- (string)
+
+<hr />
+
+### setBasePath
+
+**Description:**
+
+Sets base path.
+
+**Parameters:**
+
+- `$base_path` (string)
+
+**Returns:**
+
+- (void)
 
 <hr />
 

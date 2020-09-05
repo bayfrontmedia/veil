@@ -30,6 +30,30 @@ class Veil
 
     }
 
+    /**
+     * Returns base path.
+     *
+     * @return string
+     */
+
+    public function getBasePath(): string
+    {
+        return $this->options['base_path'];
+    }
+
+    /**
+     * Sets base path.
+     *
+     * @param string $base_path
+     *
+     * @return void
+     */
+
+    public function setBasePath(string $base_path): void
+    {
+        $this->options['base_path'] = rtrim($base_path, '/');
+    }
+
     private $injectables = [ // Assets injected via inject()
         'css' => [],
         'js' => [],
