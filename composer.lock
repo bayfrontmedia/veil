@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "2ea46bbae09a8e0d7160c82a522007b9",
+    "content-hash": "428954212c6a370cb545a50fc94f438e",
     "packages": [
         {
             "name": "bayfrontmedia/php-array-helpers",
@@ -49,6 +49,16 @@
                 "helper",
                 "helpers",
                 "php"
+            ],
+            "support": {
+                "issues": "https://github.com/bayfrontmedia/php-array-helpers/issues",
+                "source": "https://github.com/bayfrontmedia/php-array-helpers/tree/master"
+            },
+            "funding": [
+                {
+                    "url": "https://www.patreon.com/bayfrontmedia",
+                    "type": "patreon"
+                }
             ],
             "time": "2020-08-02T22:59:39+00:00"
         },
@@ -97,6 +107,16 @@
                 "sanitize",
                 "xss"
             ],
+            "support": {
+                "issues": "https://github.com/bayfrontmedia/php-sanitize/issues",
+                "source": "https://github.com/bayfrontmedia/php-sanitize/tree/v1.0.0"
+            },
+            "funding": [
+                {
+                    "url": "https://www.patreon.com/bayfrontmedia",
+                    "type": "patreon"
+                }
+            ],
             "time": "2020-07-27T19:23:34+00:00"
         },
         {
@@ -143,6 +163,10 @@
                 "markdown",
                 "parser"
             ],
+            "support": {
+                "issues": "https://github.com/erusev/parsedown/issues",
+                "source": "https://github.com/erusev/parsedown/tree/1.7.x"
+            },
             "time": "2019-12-30T22:54:17+00:00"
         },
         {
@@ -185,6 +209,9 @@
                 "minifier",
                 "minify"
             ],
+            "support": {
+                "source": "https://github.com/pfaciana/tiny-html-minifier/tree/v3.0.0"
+            },
             "time": "2020-07-27T03:41:45+00:00"
         }
     ],
@@ -197,5 +224,6 @@
     "platform": {
         "php": ">=7.1.0"
     },
-    "platform-dev": []
+    "platform-dev": [],
+    "plugin-api-version": "2.0.0"
 }
