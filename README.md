@@ -192,7 +192,7 @@ try {
 
 } catch (FileNotFoundException $e) {
 
-    http_response_code(500);
+    http_response_code(404);
 
     die($e->getMessage());
 
@@ -232,7 +232,7 @@ try {
 
 } catch (FileNotFoundException $e) {
 
-    http_response_code(500);
+    http_response_code(404);
 
     die($e->getMessage());
 
@@ -270,7 +270,7 @@ try {
 
 } catch (FileNotFoundException $e) {
 
-    http_response_code(500);
+    http_response_code(404);
 
     die($e->getMessage());
 
@@ -308,7 +308,7 @@ try {
 
 } catch (FileNotFoundException $e) {
 
-    http_response_code(500);
+    http_response_code(404);
 
     die($e->getMessage());
 
@@ -369,7 +369,7 @@ try {
 
 } catch (FileNotFoundException $e) {
 
-    http_response_code(500);
+    http_response_code(404);
     die('View not found!');
 
 }

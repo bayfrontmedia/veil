@@ -4,20 +4,20 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "428954212c6a370cb545a50fc94f438e",
+    "content-hash": "067cc813661863cb04fe9a73a5110d70",
     "packages": [
         {
             "name": "bayfrontmedia/php-array-helpers",
-            "version": "1.0.1",
+            "version": "v1.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/bayfrontmedia/php-array-helpers.git",
-                "reference": "a5d3dd357f6bee31c857e16b1db0199efb10307e"
+                "reference": "ac938e3b5a252960539e331075d86a1e38bb4264"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/bayfrontmedia/php-array-helpers/zipball/a5d3dd357f6bee31c857e16b1db0199efb10307e",
-                "reference": "a5d3dd357f6bee31c857e16b1db0199efb10307e",
+                "url": "https://api.github.com/repos/bayfrontmedia/php-array-helpers/zipball/ac938e3b5a252960539e331075d86a1e38bb4264",
+                "reference": "ac938e3b5a252960539e331075d86a1e38bb4264",
                 "shasum": ""
             },
             "require": {
@@ -52,7 +52,7 @@
             ],
             "support": {
                 "issues": "https://github.com/bayfrontmedia/php-array-helpers/issues",
-                "source": "https://github.com/bayfrontmedia/php-array-helpers/tree/master"
+                "source": "https://github.com/bayfrontmedia/php-array-helpers/tree/v1.1.0"
             },
             "funding": [
                 {
@@ -60,7 +60,7 @@
                     "type": "patreon"
                 }
             ],
-            "time": "2020-08-02T22:59:39+00:00"
+            "time": "2020-11-23T16:52:47+00:00"
         },
         {
             "name": "bayfrontmedia/php-sanitize",
