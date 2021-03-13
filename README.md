@@ -66,6 +66,9 @@ The following template tags can be used in HTML and view files:
 | `{{-- Comment —-}}` | Everything inside comment tags will be ignored and removed |
 | `{{parameter.name}}` | Replaced with escaped value from the `$data` array in dot notation |
 | `{{!parameter.name}}` | Replaced with unescaped (raw) value from the `$data` array in dot notation |
+| <code>{{parameter.name&#124;&#124;string}}</code> | Replaced with escaped value from the `$data` array in dot notation or default string if not existing |
+| <code>{{!parameter.name&#124;&#124;string}}</code> | Replaced with unescaped (raw) value from the `$data` array in dot notation or default string if not existing |
+
 
 **Raw PHP**
 
