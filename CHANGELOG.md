@@ -12,6 +12,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `Fixed` for any bug fixes.
 - `Security` in case of vulnerabilities
 
+## [Upcoming]
+
+- Added replace with default template tag
+
 ## [1.2.1] - 2020.11.27
 
 ### Changed

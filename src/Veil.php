@@ -204,6 +204,7 @@ class Veil
     public function markdown(string $markdown): string
     {
         $md = new Parsedown();
+
         return $md->text($markdown);
     }
 
@@ -322,9 +323,27 @@ class Veil
 
         $html = preg_replace("/{{--(.*?)--}}/s", '', $html);
 
-        // -------------------- Insert parameters {{in.dot.notation}} --------------------
+        // -------------------- Replace with default --------------------
 
         $data = Arr::dot($data);
+
+        $html = preg_replace_callback("/{{(.*?)\|\|(.*?)}}/", function ($match) use ($data, $html) {
+
+            $replace = Arr::get($data, $match[1], $match[2]);
+
+            return str_replace([
+                $match[0], // Unfiltered
+                '{{!' . $match[1] . '||' . $match[2] . '}}'  // Escape variable to prevent XSS attacks
+            ], [
+                $replace,
+                Sanitize::escape($replace)
+            ],
+                $match[0]
+            );
+
+        }, $html);
+
+        // -------------------- Insert parameters {{in.dot.notation}} --------------------
 
         foreach ($data as $k => $v) {
 
