@@ -12,9 +12,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `Fixed` for any bug fixes.
 - `Security` in case of vulnerabilities
 
-## [Upcoming]
+## [1.3.0]- 2021.03.13
 
-- Added replace with default template tag
+### Added
+
+- Added new template tag to replace with default string if not existing.
+
+### Fixed
+
+- Fixed bug with sort order of injectables by updating `php-array-helpers` vendor library.
 
 ## [1.2.1] - 2020.11.27
 
