@@ -137,7 +137,7 @@ class Veil
      * @param array $data (Data to pass to view in dot notation)
      * @param bool $minify (Minify compiled HTML?)
      *
-     * @return self
+     * @return string
      *
      * @throws FileNotFoundException
      */
@@ -323,26 +323,6 @@ class Veil
 
         $html = preg_replace("/{{--(.*?)--}}/s", '', $html);
 
-        // -------------------- Replace with default --------------------
-
-        $data = Arr::dot($data);
-
-        $html = preg_replace_callback("/{{(.*?)\|\|(.*?)}}/", function ($match) use ($data, $html) {
-
-            $replace = Arr::get($data, $match[1], $match[2]);
-
-            return str_replace([
-                $match[0], // Unfiltered
-                '{{!' . $match[1] . '||' . $match[2] . '}}'  // Escape variable to prevent XSS attacks
-            ], [
-                $replace,
-                Sanitize::escape($replace)
-            ],
-                $match[0]
-            );
-
-        }, $html);
-
         // -------------------- Insert parameters {{in.dot.notation}} --------------------
 
         foreach ($data as $k => $v) {
@@ -359,7 +339,25 @@ class Veil
 
         }
 
-        return $html;
+        // -------------------- Replace with default --------------------
+
+        $data = Arr::dot($data);
+
+        return preg_replace_callback("/{{(.*?)\|\|(.*?)}}/", function ($match) use ($data, $html) {
+
+            $replace = Arr::get($data, $match[1], $match[2]);
+
+            return str_replace([
+                $match[0], // Unfiltered
+                '{{!' . $match[1] . '||' . $match[2] . '}}'  // Escape variable to prevent XSS attacks
+            ], [
+                $replace,
+                Sanitize::escape($replace)
+            ],
+                $match[0]
+            );
+
+        }, $html);
 
     }
 
