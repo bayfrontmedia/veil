@@ -12,6 +12,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `Fixed` for any bug fixes.
 - `Security` in case of vulnerabilities
 
+## [1.4.0]- 2022.01.24
+
+### Added
+
+- Added support for `@section` and `@place` template tags.
+
 ## [1.3.1]- 2021.09.13
 
 ### Fixed

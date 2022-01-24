@@ -1,12 +1,5 @@
 <?php
 
-/**
- * @package veil
- * @link https://github.com/bayfrontmedia/veil
- * @author John Robinson <john@bayfrontmedia.com>
- * @copyright 2020 Bayfront Media
- */
-
 namespace Bayfront\Veil;
 
 use Bayfront\ArrayHelpers\Arr;
@@ -306,11 +299,6 @@ class Veil
                 $use = explode(':', $tag, 2);
 
                 if (isset($use[1])) { // If valid @section syntax
-
-                    /*
-                     * TODO:
-                     * Is PHP_EOL going to be problematic?
-                     */
 
                     $section = explode(PHP_EOL, $use[1], 2);
 
