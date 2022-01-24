@@ -1,6 +1,6 @@
 ## Veil
 
-A fast, lightweight, framework agnostic PHP template engine.
+A fast, lightweight, framework-agnostic PHP template engine.
 
 Although there are some respectable, well-known PHP template engines available, most of them can be extremely complex and include a great deal of customized syntax to learn.
 In addition, using proprietary libraries to perform simple functions and iterations can introduce unnecessary complexity and overhead, especially since PHP is a templating language in and of itself.
@@ -19,7 +19,10 @@ This project is open source and available under the [MIT License](LICENSE).
 
 ## Author
 
-John Robinson, [Bayfront Media](https://www.bayfrontmedia.com)
+<img src="https://cdn1.onbayfront.com/bfm/brand/bayfront-media-logo.svg" alt="Bayfront Media" width="250" />
+
+- [Bayfront Media homepage](https://www.bayfrontmedia.com?utm_source=github_repo&amp;utm_medium=direct)
+- [Bayfront Media GitHub](https://github.com/bayfrontmedia)
 
 ## Requirements
 
@@ -51,7 +54,7 @@ $veil = new Veil($options);
 
 ### Working with content
 
-**Template tags**
+#### Template tags
 
 A variety of template tags can be used with Veil. 
 This allows for functionality such as template inheritance (chaining files), injection of content, and usage of passed parameters.
@@ -63,14 +66,86 @@ The following template tags can be used in HTML and view files:
 | `@use:path/from/base` | Adds contents of another file |
 | `@markdown:path/from/base` | Adds markdown of another file as HTML (see [markdown](#markdown)) |
 | `@inject:type` | Injects content (see [inject](#inject)) |
+| `@section:name` | Defines a section to be placed in a view (see [sections](#sections)) |
+| `@place:name` | Places a defined section into the view (see [sections](#sections)) |
+| `?@place:name` | Places an optionally defined section into the view (see [sections](#sections)) |
 | `{{-- Comment —-}}` | Everything inside comment tags will be ignored and removed |
 | `{{parameter.name}}` | Replaced with escaped value from the `$data` array in dot notation |
 | `{{!parameter.name}}` | Replaced with unescaped (raw) value from the `$data` array in dot notation |
 | <code>{{parameter.name&#124;&#124;string}}</code> | Replaced with escaped value from the `$data` array in dot notation or default string if not existing |
 | <code>{{!parameter.name&#124;&#124;string}}</code> | Replaced with unescaped (raw) value from the `$data` array in dot notation or default string if not existing |
 
+##### Sections
 
-**Raw PHP**
+Sections are used to define a block of HTML using the `@section` tag, 
+which is placed in a view using the `@place` tag.
+
+**Example `pages/index`:**
+
+```html
+@section:head
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
+<style>html {
+        font-family: 'Open Sans', sans-serif;
+    }</style>
+
+@endsection
+
+@section:content
+
+<p>Welcome, {{name}}!</p>
+
+<p>This is some content.</p>
+
+@endsection
+
+@use:layouts/default
+```
+
+**Example `layouts/default`:**
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>{{title}}</title>
+
+    @place:head
+
+</head>
+<body style="background-color:#f0f0f0;color:#323232;">
+
+<div style="max-width:800px;margin:auto;background-color:white;padding:1rem;">
+
+    <h1>{{title}}</h1>
+
+    @place:content
+
+    @use:layouts/partials/sidebar
+
+    @use:layouts/partials/footer
+
+</div>
+
+?@place:end_body
+
+</body>
+</html>
+```
+
+In the examples above, the sections `head` and `content` are defined in `pages/index`, 
+then placed in `layouts/default`.
+
+In addition, an optional `end_body` section is placed before the closing `body` tag.
+
+#### Raw PHP
 
 View files can directly access the `$data` array in dot notation.
 In fact, any other PHP code can be directly embedded in any view file.
