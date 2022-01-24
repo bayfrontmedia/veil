@@ -1,12 +1,5 @@
 <?php
 
-/**
- * @package veil
- * @link https://github.com/bayfrontmedia/veil
- * @author John Robinson <john@bayfrontmedia.com>
- * @copyright 2020 Bayfront Media
- */
-
 namespace Bayfront\Veil;
 
 use Bayfront\ArrayHelpers\Arr;
@@ -240,6 +233,19 @@ class Veil
     }
 
     /**
+     * Array of sections whose keys = name
+     * and value = content.
+     *
+     * NOTE:
+     * This array must be static to persist with the recursive calls
+     * in the _processTemplateTags method.
+     *
+     * @var array
+     */
+
+    private static $sections = [];
+
+    /**
      * Replaces template tags with their respective values
      *
      * @param string $html
@@ -281,6 +287,51 @@ class Veil
             $html = $this->_processTemplateTags($html, $data);
 
         }
+
+        // -------------------- Tag: @section: --------------------
+
+        preg_match_all("/@section:(.*?)@endsection/s", $html, $tags);
+
+        if (isset($tags[0]) && !empty($tags[0])) { // If a tag was found
+
+            foreach ($tags[0] as $tag) {
+
+                $use = explode(':', $tag, 2);
+
+                if (isset($use[1])) { // If valid @section syntax
+
+                    $section = explode(PHP_EOL, $use[1], 2);
+
+                    if (isset($section[1])) {
+
+                        // Define a section (key = name, value = content
+                        self::$sections[$section[0]] = str_replace('@endsection', '', trim($section[1]));
+
+                        // Remove original tag from HTML source
+                        $html = str_replace($tag, '', $html);
+
+                    }
+
+                }
+
+            }
+
+        }
+
+        // Place content
+
+        foreach (self::$sections as $name => $content) {
+
+            $html = str_replace([
+                '?@place:' . $name,
+                '@place:' . $name
+            ], $content, $html);
+
+        }
+
+        // Remove unused optional ?@place tags
+
+        $html = preg_replace('/\?@place:\S+/', '', $html);
 
         // -------------------- Tag: @markdown: --------------------
 
@@ -343,7 +394,7 @@ class Veil
 
         $data = Arr::dot($data);
 
-        return preg_replace_callback("/{{(.*?)\|\|(.*?)}}/", function ($match) use ($data, $html) {
+        $html = preg_replace_callback("/{{(.*?)\|\|(.*?)}}/", function ($match) use ($data, $html) {
 
             $replace = Arr::get($data, $match[1], $match[2]);
 
@@ -358,6 +409,10 @@ class Veil
             );
 
         }, $html);
+
+        // -------------------- Trim --------------------
+
+        return trim($html);
 
     }
 

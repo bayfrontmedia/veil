@@ -13,6 +13,10 @@ about: Should something great be added?
 
 <!-- Provide an explanation how/when the feature would be helpful. --> 
 
+## Possible solution
+
+<!-- Optional possible solution/fix to this issue -->
+
 ## Additional information
 
 <!--- Optional additional information/details. -->
