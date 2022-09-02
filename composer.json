@@ -23,6 +23,10 @@
   "support": {
     "issues": "https://github.com/bayfrontmedia/veil/issues"
   },
+  "config": {
+    "optimize-autoloader": true,
+    "preferred-install": "dist"
+  },
   "require": {
     "php": ">=7.1.0",
     "bayfrontmedia/php-array-helpers": "^1.3",
