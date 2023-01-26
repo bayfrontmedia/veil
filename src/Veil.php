@@ -10,7 +10,7 @@ use Parsedown;
 class Veil
 {
 
-    private $options;
+    private array $options;
 
     public function __construct(array $options)
 
@@ -47,7 +47,7 @@ class Veil
         $this->options['base_path'] = rtrim($base_path, '/');
     }
 
-    private $injectables = [ // Assets injected via inject()
+    private array $injectables = [ // Assets injected via inject()
         'css' => [],
         'js' => [],
         'head' => [],
@@ -62,13 +62,13 @@ class Veil
      * NOTE: If $content is an array, all injectables will share the same priority.
      *
      * @param string $type
-     * @param string|array $content
+     * @param array|string $content
      * @param int $priority (Injectables of the same type will be injected in order of priority)
      *
      * @return self
      */
 
-    public function inject(string $type, $content, int $priority = 5): self
+    public function inject(string $type, array|string $content, int $priority = 5): self
     {
 
         foreach ((array)$content as $inject) {
@@ -185,7 +185,7 @@ class Veil
     }
 
     /**
-     * Convert markdown syntax to HTML
+     * Convert Markdown syntax to HTML
      *
      * See: https://github.com/erusev/parsedown
      *
@@ -207,7 +207,7 @@ class Veil
      * NOTE: Do not include file extension, as this will search for *.veil.php and *.php files
      *
      * @param string $file
-     * @param mixed $data (Parameters passed to the required file
+     * @param mixed|null $data (Parameters passed to the required file
      *
      * @return string
      *
@@ -215,7 +215,7 @@ class Veil
      *
      */
 
-    private function _requireToVar(string $file, /* @noinspection PhpUnusedParameterInspection */ $data = NULL): string
+    private function _requireToVar(string $file, /* @noinspection PhpUnusedParameterInspection */ mixed $data = NULL): string
     {
 
         if (file_exists($file)) {
@@ -243,7 +243,7 @@ class Veil
      * @var array
      */
 
-    private static $sections = [];
+    private static array $sections = [];
 
     /**
      * Replaces template tags with their respective values
