@@ -61,18 +61,18 @@ This allows for functionality such as template inheritance (chaining files), inj
 
 The following template tags can be used in HTML and view files:
 
-| Tag | Function
-| --- | --- |
-| `@use:path/from/base` | Adds contents of another file |
-| `@markdown:path/from/base` | Adds markdown of another file as HTML (see [markdown](#markdown)) |
-| `@inject:type` | Injects content (see [inject](#inject)) |
-| `@section:name` | Defines a section to be placed in a view (see [sections](#sections)) |
-| `@place:name` | Places a defined section into the view (see [sections](#sections)) |
-| `?@place:name` | Places an optionally defined section into the view (see [sections](#sections)) |
-| `{{-- Comment —-}}` | Everything inside comment tags will be ignored and removed |
-| `{{parameter.name}}` | Replaced with escaped value from the `$data` array in dot notation |
-| `{{!parameter.name}}` | Replaced with unescaped (raw) value from the `$data` array in dot notation |
-| <code>{{parameter.name&#124;&#124;string}}</code> | Replaced with escaped value from the `$data` array in dot notation or default string if not existing |
+| Tag                                                | Function                                                                                                     |
+|----------------------------------------------------|--------------------------------------------------------------------------------------------------------------|
+| `@use:path/from/base`                              | Adds contents of another file                                                                                |
+| `@markdown:path/from/base`                         | Adds markdown of another file as HTML (see [markdown](#markdown))                                            |
+| `@inject:type`                                     | Injects content (see [inject](#inject))                                                                      |
+| `@section:name`                                    | Defines a section to be placed in a view (see [sections](#sections))                                         |
+| `@place:name`                                      | Places a defined section into the view (see [sections](#sections))                                           |
+| `?@place:name`                                     | Places an optionally defined section into the view (see [sections](#sections))                               |
+| `{{-- Comment —-}}`                                | Everything inside comment tags will be ignored and removed                                                   |
+| `{{parameter.name}}`                               | Replaced with escaped value from the `$data` array in dot notation                                           |
+| `{{!parameter.name}}`                              | Replaced with unescaped (raw) value from the `$data` array in dot notation                                   |
+| <code>{{parameter.name&#124;&#124;string}}</code>  | Replaced with escaped value from the `$data` array in dot notation or default string if not existing         |
 | <code>{{!parameter.name&#124;&#124;string}}</code> | Replaced with unescaped (raw) value from the `$data` array in dot notation or default string if not existing |
 
 ##### Sections
@@ -147,7 +147,7 @@ In addition, an optional `end_body` section is placed before the closing `body` 
 
 #### Raw PHP
 
-View files can directly access the `$data` array in dot notation.
+View files can directly access the `$data` array in raw PHP.
 In fact, any other PHP code can be directly embedded in any view file.
 However, this should be kept to simple tasks such as performing loop iterations.
 Frequently embedding raw PHP from your view may be a sign you have too much logic within the template.
@@ -248,7 +248,7 @@ Get compiled HTML as a string.
 **Parameters:**
 
 - `$html` (string)
-- `$data = []` (array): Data to pass to HTML in dot notation
+- `$data = []` (array): Data to pass to HTML
 - `$minify = false` (bool): Minify compiled HTML? See [minify](#minify) for more info.
 
 **Returns:**
@@ -288,7 +288,7 @@ Echo compiled HTML.
 **Parameters:**
 
 - `$html` (string)
-- `$data = []` (array): Data to pass to HTML in dot notation
+- `$data = []` (array): Data to pass to HTML
 - `$minify = false` (bool): Minify compiled HTML? See [minify](#minify) for more info.
 
 **Returns:**
@@ -328,7 +328,7 @@ Get compiled template file as a string.
 **Parameters:**
 
 - `$file` (string): Path to file from base path, excluding file extension
-- `$data = []` (array): Data to pass to view in dot notation
+- `$data = []` (array): Data to pass to view
 - `$minify = false` (bool): Minify compiled HTML? See [minify](#minify) for more info.
 
 **Returns:**
@@ -366,7 +366,7 @@ Echo compiled template file.
 **Parameters:**
 
 - `$file` (string): Path to file from base path, excluding file extension
-- `$data = []` (array): Data to pass to view in dot notation
+- `$data = []` (array): Data to pass to view
 - `$minify = false` (bool): Minify compiled HTML? See [minify](#minify) for more info.
 
 **Returns:**
@@ -424,7 +424,7 @@ See [markdown](#markdown).
 
 **Description:**
 
-Convert markdown syntax to HTML.
+Convert Markdown syntax to HTML.
 
 Currently, Veil uses [Parsedown](https://github.com/erusev/parsedown) for this method.
 

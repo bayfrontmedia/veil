@@ -87,7 +87,7 @@ class Veil
      * Get compiled HTML as a string
      *
      * @param string $html
-     * @param array $data (Data to pass to HTML in dot notation)
+     * @param array $data (Data to pass to HTML)
      * @param bool $minify (Minify compiled HTML?)
      *
      * @return string
@@ -99,10 +99,10 @@ class Veil
     {
 
         if (true === $minify) {
-            return $this->minify($this->_processTemplateTags($html, Arr::dot($data)));
+            return $this->minify($this->_processTemplateTags($html, $data));
         }
 
-        return $this->_processTemplateTags($html, Arr::dot($data));
+        return $this->_processTemplateTags($html, $data);
 
     }
 
@@ -110,7 +110,7 @@ class Veil
      * Echo compiled HTML
      *
      * @param string $html
-     * @param array $data (Data to pass to HTML in dot notation)
+     * @param array $data (Data to pass to HTML)
      * @param bool $minify (Minify compiled HTML?)
      *
      * @return void
@@ -127,7 +127,7 @@ class Veil
      * Get compiled template file as a string
      *
      * @param string $file (Path to file from base path, excluding file extension)
-     * @param array $data (Data to pass to view in dot notation)
+     * @param array $data (Data to pass to view)
      * @param bool $minify (Minify compiled HTML?)
      *
      * @return string
@@ -139,8 +139,6 @@ class Veil
     {
 
         $filename = $this->options['base_path'] . '/' . ltrim($file, '/') . $this->options['file_extension'];
-
-        $data = Arr::dot($data);
 
         $html = $this->_requireToVar($filename, $data);
 
@@ -156,7 +154,7 @@ class Veil
      * Echo compiled template file
      *
      * @param string $file (Path to file from base path, excluding file extension)
-     * @param array $data (Data to pass to view in dot notation)
+     * @param array $data (Data to pass to view)
      * @param bool $minify (Minify compiled HTML?)
      *
      * @return void
@@ -376,7 +374,9 @@ class Veil
 
         // -------------------- Insert parameters {{in.dot.notation}} --------------------
 
-        foreach ($data as $k => $v) {
+        $dot_data = Arr::dot($data);
+
+        foreach ($dot_data as $k => $v) {
 
             $html = str_replace([
                 '{{!' . $k . '}}', // Unfiltered
@@ -392,11 +392,9 @@ class Veil
 
         // -------------------- Replace with default --------------------
 
-        $data = Arr::dot($data);
+        $html = preg_replace_callback("/{{(.*?)\|\|(.*?)}}/", function ($match) use ($dot_data, $html) {
 
-        $html = preg_replace_callback("/{{(.*?)\|\|(.*?)}}/", function ($match) use ($data, $html) {
-
-            $replace = Arr::get($data, $match[1], $match[2]);
+            $replace = Arr::get($dot_data, $match[1], $match[2]);
 
             return str_replace([
                 $match[0], // Unfiltered
