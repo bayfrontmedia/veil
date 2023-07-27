@@ -61,19 +61,23 @@ This allows for functionality such as template inheritance (chaining files), inj
 
 The following template tags can be used in HTML and view files:
 
-| Tag                                                | Function                                                                                                     |
-|----------------------------------------------------|--------------------------------------------------------------------------------------------------------------|
-| `@use:path/from/base`                              | Adds contents of another file                                                                                |
-| `@markdown:path/from/base`                         | Adds markdown of another file as HTML (see [markdown](#markdown))                                            |
-| `@inject:type`                                     | Injects content (see [inject](#inject))                                                                      |
-| `@section:name`                                    | Defines a section to be placed in a view (see [sections](#sections))                                         |
-| `@place:name`                                      | Places a defined section into the view (see [sections](#sections))                                           |
-| `?@place:name`                                     | Places an optionally defined section into the view (see [sections](#sections))                               |
-| `{{-- Comment —-}}`                                | Everything inside comment tags will be ignored and removed                                                   |
-| `{{parameter.name}}`                               | Replaced with escaped value from the `$data` array in dot notation                                           |
-| `{{!parameter.name}}`                              | Replaced with unescaped (raw) value from the `$data` array in dot notation                                   |
-| <code>{{parameter.name&#124;&#124;string}}</code>  | Replaced with escaped value from the `$data` array in dot notation or default string if not existing         |
-| <code>{{!parameter.name&#124;&#124;string}}</code> | Replaced with unescaped (raw) value from the `$data` array in dot notation or default string if not existing |
+| Tag                                                 | Function                                                                                                               |
+|-----------------------------------------------------|------------------------------------------------------------------------------------------------------------------------|
+| `@use:path/from/base`                               | Adds contents of another file                                                                                          |
+| `@markdown:path/from/base`                          | Adds markdown of another file as HTML (see [markdown](#markdown))                                                      |
+| `@inject:type`                                      | Injects content (see [inject](#inject))                                                                                |
+| `@section:name`                                     | Defines a section to be placed in a view (see [sections](#sections))                                                   |
+| `@place:name`                                       | Places a defined section into the view (see [sections](#sections))                                                     |
+| `?@place:name`                                      | Places an optionally defined section into the view (see [sections](#sections))                                         |
+| `{{-- Comment —-}}`                                 | Everything inside comment tags will be ignored and removed                                                             |
+| `{{parameter.name}}`                                | Replaced with escaped value from the `$data` array in dot notation                                                     |
+| `{{!parameter.name}}`                               | Replaced with unescaped (raw) value from the `$data` array in dot notation                                             |
+| <code>{{parameter.name&#124;&#124;default}}</code>  | Replaced with escaped value from the `$data` array in dot notation or default value if not existing [*](#note)         |
+| <code>{{!parameter.name&#124;&#124;default}}</code> | Replaced with unescaped (raw) value from the `$data` array in dot notation or default value if not existing [*](#note) |
+
+> ##### Note:
+> 
+> The default value can be either a plaintext string, or another key on the `$data` array in dot notation.
 
 ##### Sections
 
