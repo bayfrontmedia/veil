@@ -257,11 +257,15 @@ class Veil
     private function _processTemplateTags(string $html, array $data): string
     {
 
+        // -------------------- Remove comments {{-- COMMENT —-}} --------------------
+
+        $html = preg_replace("/{{--(.*?)--}}/s", '', $html);
+
         // -------------------- Tag: @use: --------------------
 
         preg_match_all("/@use:\S+/", $html, $tags); // Any non-whitespace
 
-        if (isset($tags[0]) && !empty($tags[0])) { // If a tag was found
+        if (!empty($tags[0])) { // If a tag was found
 
             foreach ($tags[0] as $tag) {
 
@@ -290,7 +294,7 @@ class Veil
 
         preg_match_all("/@section:(.*?)@endsection/s", $html, $tags);
 
-        if (isset($tags[0]) && !empty($tags[0])) { // If a tag was found
+        if (!empty($tags[0])) { // If a tag was found
 
             foreach ($tags[0] as $tag) {
 
@@ -335,7 +339,7 @@ class Veil
 
         preg_match_all("/@markdown:\S+/", $html, $tags); // Any non-whitespace
 
-        if (isset($tags[0]) && !empty($tags[0])) { // If a tag was found
+        if (!empty($tags[0])) { // If a tag was found
 
             foreach ($tags[0] as $tag) {
 
@@ -368,10 +372,6 @@ class Veil
 
         }
 
-        // -------------------- Remove comments {{-- COMMENT —-}} --------------------
-
-        $html = preg_replace("/{{--(.*?)--}}/s", '', $html);
-
         // -------------------- Insert parameters {{in.dot.notation}} --------------------
 
         $dot_data = Arr::dot($data);
@@ -394,7 +394,7 @@ class Veil
 
         $html = preg_replace_callback("/{{(.*?)\|\|(.*?)}}/", function ($match) use ($dot_data, $html) {
 
-            $replace = Arr::get($dot_data, $match[1], $match[2]);
+            $replace = Arr::get($dot_data, $match[1], Arr::get($dot_data, $match[2], $match[2])); // Attempt to get default from array before returning string
 
             return str_replace([
                 $match[0], // Unfiltered

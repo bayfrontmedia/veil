@@ -12,6 +12,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `Fixed` for any bug fixes.
 - `Security` in case of vulnerabilities
 
+## [2.1.1]- 2023.07.27
+
+### Changed
+
+- Updated order template tags are processed to ensure comments are removed first.
+- Updated template tags for `$data` array with default value to check if exists on array before returning string.
+- Minor code cleanup.
+
 ## [2.1.0]- 2023.04.05
 
 ### Changed
