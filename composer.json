@@ -30,7 +30,7 @@
   "require": {
     "php": "^8.0",
     "bayfrontmedia/php-array-helpers": "^2.0",
-    "bayfrontmedia/php-sanitize": "^2.0",
+    "bayfrontmedia/php-sanitize": "^2.1",
     "erusev/parsedown": "^1.7.4",
     "pfaciana/tiny-html-minifier": "*"
   },
