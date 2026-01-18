@@ -72,12 +72,41 @@ The following template tags can be used in HTML and view files:
 | `{{-- Comment —-}}`                                 | Everything inside comment tags will be ignored and removed                                                             |
 | `{{parameter.name}}`                                | Replaced with escaped value from the `$data` array in dot notation                                                     |
 | `{{!parameter.name}}`                               | Replaced with unescaped (raw) value from the `$data` array in dot notation                                             |
+| `@hasData:`                                         | Everything inside only visible if data contains key in dot notation                                                    |
+| `@hasAnyData:`                                      | Everything inside only visible if data contains at least one key in dot notation                                       |
+| `@hasAllData:`                                      | Everything inside only visible if data contains all keys in dot notation                                               |
+| `@dataEquals:`                                      | Everything inside only visible if data key in dot notation equals case-senstivie value                                 |
+| `@dataNotEquals:`                                   | Everything inside only visible if data key in dot notation does not equal case-sensitive value                         |
 | <code>{{parameter.name&#124;&#124;default}}</code>  | Replaced with escaped value from the `$data` array in dot notation or default value if not existing [*](#note)         |
 | <code>{{!parameter.name&#124;&#124;default}}</code> | Replaced with unescaped (raw) value from the `$data` array in dot notation or default value if not existing [*](#note) |
 
 > ##### Note:
 > 
 > The default value can be either a plaintext string, or another key on the `$data` array in dot notation.
+
+**Examples:**
+
+```html
+@hasData:nested.key
+<p>Content only visible if data contains "nested.key".</p>
+@endHasData
+
+@hasAnyData:key|nested.key
+<p>Content only visible if data contains "key" or "nested.key".</p>
+@endHasAnyData
+
+@hasAllData:key|nested.key
+<p>Content only visible if data contains "key" and "nested.key".</p>
+@endHasAllData
+
+@dataEquals:nested.key|value
+<p>Content only visible if data key "nested.key" exists and has case-sensitive value "value".</p>
+@endDataEquals
+
+@dataNotEquals:nested.key|value
+<p>Content only visible if data key "nested.key" does not exist or does not have case-sensitive value "value".</p>
+@endDataNotEquals
+```
 
 ##### Sections
 
@@ -92,9 +121,11 @@ which is placed in a view using the `@place` tag.
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
-<style>html {
+<style>
+    html {
         font-family: 'Open Sans', sans-serif;
-    }</style>
+    }
+</style>
 
 @endsection
 

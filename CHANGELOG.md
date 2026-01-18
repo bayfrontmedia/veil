@@ -12,6 +12,22 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `Fixed` for any bug fixes.
 - `Security` in case of vulnerabilities
 
+## [2.2.0]- 2026.01.18
+
+### Added
+
+- Added template tags:
+    - `@hasData`
+    - `@hasAnyData`
+    - `@hasAllData`
+    - `@dataEquals`
+    - `@dataNotEquals`
+
+### Changed
+
+- Updated dependencies
+- General code cleanup
+
 ## [2.1.2]- 2024.12.23
 
 ### Added
