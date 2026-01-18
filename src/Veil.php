@@ -13,7 +13,6 @@ class Veil
     private array $options;
 
     public function __construct(array $options)
-
     {
 
         $this->options = array_merge([
@@ -28,7 +27,6 @@ class Veil
      *
      * @return string
      */
-
     public function getBasePath(): string
     {
         return $this->options['base_path'];
@@ -38,10 +36,8 @@ class Veil
      * Sets base path.
      *
      * @param string $base_path
-     *
      * @return void
      */
-
     public function setBasePath(string $base_path): void
     {
         $this->options['base_path'] = rtrim($base_path, '/');
@@ -64,10 +60,8 @@ class Veil
      * @param string $type
      * @param array|string $content
      * @param int $priority (Injectables of the same type will be injected in order of priority)
-     *
      * @return self
      */
-
     public function inject(string $type, array|string $content, int $priority = 5): self
     {
 
@@ -89,12 +83,9 @@ class Veil
      * @param string $html
      * @param array $data (Data to pass to HTML)
      * @param bool $minify (Minify compiled HTML?)
-     *
      * @return string
-     *
      * @throws FileNotFoundException
      */
-
     public function getHtml(string $html, array $data = [], bool $minify = false): string
     {
 
@@ -112,12 +103,9 @@ class Veil
      * @param string $html
      * @param array $data (Data to pass to HTML)
      * @param bool $minify (Minify compiled HTML?)
-     *
      * @return void
-     *
      * @throws FileNotFoundException
      */
-
     public function html(string $html, array $data = [], bool $minify = false): void
     {
         echo $this->getHtml($html, $data, $minify);
@@ -129,12 +117,9 @@ class Veil
      * @param string $file (Path to file from base path, excluding file extension)
      * @param array $data (Data to pass to view)
      * @param bool $minify (Minify compiled HTML?)
-     *
      * @return string
-     *
      * @throws FileNotFoundException
      */
-
     public function getView(string $file, array $data = [], bool $minify = false): string
     {
 
@@ -156,12 +141,9 @@ class Veil
      * @param string $file (Path to file from base path, excluding file extension)
      * @param array $data (Data to pass to view)
      * @param bool $minify (Minify compiled HTML?)
-     *
      * @return void
-     *
      * @throws FileNotFoundException
      */
-
     public function view(string $file, array $data = [], bool $minify = false): void
     {
         echo $this->getView($file, $data, $minify);
@@ -173,10 +155,8 @@ class Veil
      * See: https://github.com/pfaciana/tiny-html-minifier
      *
      * @param string $html
-     *
      * @return string
      */
-
     public function minify(string $html): string
     {
         return TinyMinify::html($html);
@@ -188,14 +168,11 @@ class Veil
      * See: https://github.com/erusev/parsedown
      *
      * @param string $markdown
-     *
      * @return string
      */
-
     public function markdown(string $markdown): string
     {
         $md = new Parsedown();
-
         return $md->text($markdown);
     }
 
@@ -206,24 +183,17 @@ class Veil
      *
      * @param string $file
      * @param mixed|null $data (Parameters passed to the required file
-     *
      * @return string
-     *
      * @throws FileNotFoundException
      *
      */
-
     private function _requireToVar(string $file, /* @noinspection PhpUnusedParameterInspection */ mixed $data = NULL): string
     {
 
         if (file_exists($file)) {
-
             ob_start();
-
             require($file);
-
             return ob_get_clean();
-
         }
 
         throw new FileNotFoundException('Unable to load view: ' . $file);
@@ -240,7 +210,6 @@ class Veil
      *
      * @var array
      */
-
     private static array $sections = [];
 
     /**
@@ -248,12 +217,9 @@ class Veil
      *
      * @param string $html
      * @param array $data (Array of data to be passed as parameters)
-     *
      * @return string
-     *
      * @throws FileNotFoundException
      */
-
     private function _processTemplateTags(string $html, array $data): string
     {
 
@@ -408,6 +374,166 @@ class Veil
 
         }, $html);
 
+        // ------------------------- Data tags -------------------------
+
+        // @hasData
+
+        preg_match_all("/@hasData:(.*?)@endHasData/s", $html, $tags);
+
+        if (isset($tags[0]) && is_array($tags[0])) { // If a tag was found
+
+            foreach ($tags[0] as $tag) { // $tag = Entire block
+
+                $use = explode(':', $tag, 2);
+
+                if (isset($use[1])) { // If valid @hasData syntax
+
+                    $can = explode(PHP_EOL, $use[1], 2);
+
+                    if (isset($can[1])) {
+
+                        if (Arr::has($data, $can[0])) {
+                            $html = str_replace($tag, str_replace('@endHasData', '', $can[1]), $html);
+                        } else {
+                            $html = str_replace($tag, '', $html);
+                        }
+
+                    }
+
+                }
+
+            }
+
+        }
+
+        // @hasAnyData
+
+        preg_match_all("/@hasAnyData:(.*?)@endHasAnyData/s", $html, $tags);
+
+        if (isset($tags[0]) && is_array($tags[0])) { // If a tag was found
+
+            foreach ($tags[0] as $tag) { // $tag = Entire block
+
+                $use = explode(':', $tag, 2);
+
+                if (isset($use[1])) { // If valid @hasAnyData syntax
+
+                    $can = explode(PHP_EOL, $use[1], 2);
+
+                    if (isset($can[1])) {
+
+                        if (Arr::hasAnyValues($data, explode('|', $can[0]))) {
+                            $html = str_replace($tag, str_replace('@hasAnyData', '', $can[1]), $html);
+                        } else {
+                            $html = str_replace($tag, '', $html);
+                        }
+
+                    }
+
+                }
+
+            }
+
+        }
+
+        // @hasAllData
+
+        preg_match_all("/@hasAllData:(.*?)@endHasAllData/s", $html, $tags);
+
+        if (isset($tags[0]) && is_array($tags[0])) { // If a tag was found
+
+            foreach ($tags[0] as $tag) { // $tag = Entire block
+
+                $use = explode(':', $tag, 2);
+
+                if (isset($use[1])) { // If valid @hasAllData syntax
+
+                    $can = explode(PHP_EOL, $use[1], 2);
+
+                    if (isset($can[1])) {
+
+                        if (Arr::hasAllValues($data, explode('|', $can[0]))) {
+                            $html = str_replace($tag, str_replace('@hasAllData', '', $can[1]), $html);
+                        } else {
+                            $html = str_replace($tag, '', $html);
+                        }
+
+                    }
+
+                }
+
+            }
+
+        }
+
+        // @dataEquals
+
+        preg_match_all("/@dataEquals:(.*?)@endDataEquals/s", $html, $tags);
+
+        if (isset($tags[0]) && is_array($tags[0])) { // If a tag was found
+
+            foreach ($tags[0] as $tag) { // $tag = Entire block
+
+                $use = explode(':', $tag, 2);
+
+                if (isset($use[1])) { // If valid @dataEquals syntax
+
+                    $can = explode(PHP_EOL, $use[1], 2);
+
+                    if (isset($can[1])) {
+
+                        $data_tag = explode('|', $can[0], 2);
+
+                        if (isset($data_tag[1])
+                            && Arr::has($data, $data_tag[0])
+                            && Arr::get($data, $data_tag[0]) === $data_tag[1]) {
+                            $html = str_replace($tag, str_replace('@dataEquals', '', $can[1]), $html);
+                        } else {
+                            $html = str_replace($tag, '', $html);
+                        }
+
+                    }
+
+                }
+
+            }
+
+        }
+
+        // @dataNotEquals
+
+        preg_match_all("/@dataNotEquals:(.*?)@endDataNotEquals/s", $html, $tags);
+
+        if (isset($tags[0]) && is_array($tags[0])) { // If a tag was found
+
+            foreach ($tags[0] as $tag) { // $tag = Entire block
+
+                $use = explode(':', $tag, 2);
+
+                if (isset($use[1])) { // If valid @dataNotEquals syntax
+
+                    $can = explode(PHP_EOL, $use[1], 2);
+
+                    if (isset($can[1])) {
+
+                        $data_tag = explode('|', $can[0], 2);
+
+                        if (!isset($data_tag[1])
+                            || !Arr::has($data, $data_tag[0])
+                            || Arr::get($data, $data_tag[0]) !== $data_tag[1]) {
+                            $html = str_replace($tag, str_replace('@dataNotEquals', '', $can[1]), $html);
+                        } else {
+                            $html = str_replace($tag, '', $html);
+                        }
+
+                    }
+
+                }
+
+            }
+
+        }
+
         // -------------------- Trim --------------------
 
         return trim($html);
@@ -418,10 +544,8 @@ class Veil
      * Returns a string of content to be injected to a view in descending order according to priority
      *
      * @param string $type
-     *
      * @return string
      */
-
     private function _getInjectable(string $type): string
     {
 
