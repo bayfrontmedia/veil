@@ -75,8 +75,8 @@ The following template tags can be used in HTML and view files:
 | `@hasData:`                                         | Everything inside only visible if data contains key in dot notation                                                    |
 | `@hasAnyData:`                                      | Everything inside only visible if data contains at least one key in dot notation                                       |
 | `@hasAllData:`                                      | Everything inside only visible if data contains all keys in dot notation                                               |
-| `@dataEquals:`                                      | Everything inside only visible if data key in dot notation equals case-senstivie value                                 |
-| `@dataNotEquals:`                                   | Everything inside only visible if data key in dot notation does not equal case-sensitive value                         |
+| `@dataEquals:`                                      | Everything inside only visible if string value of data key in dot notation equals case-sensitive value                 |
+| `@dataNotEquals:`                                   | Everything inside only visible if string value of data key in dot notation does not equal case-sensitive value         |
 | <code>{{parameter.name&#124;&#124;default}}</code>  | Replaced with escaped value from the `$data` array in dot notation or default value if not existing [*](#note)         |
 | <code>{{!parameter.name&#124;&#124;default}}</code> | Replaced with unescaped (raw) value from the `$data` array in dot notation or default value if not existing [*](#note) |
 

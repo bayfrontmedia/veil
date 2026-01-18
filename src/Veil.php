@@ -488,7 +488,7 @@ class Veil
 
                         if (isset($data_tag[1])
                             && Arr::has($data, $data_tag[0])
-                            && Arr::get($data, $data_tag[0]) === $data_tag[1]) {
+                            && strval(Arr::get($data, $data_tag[0])) === $data_tag[1]) {
                             $html = str_replace($tag, str_replace('@endDataEquals', '', $can[1]), $html);
                         } else {
                             $html = str_replace($tag, '', $html);
@@ -522,7 +522,7 @@ class Veil
 
                         if (!isset($data_tag[1])
                             || !Arr::has($data, $data_tag[0])
-                            || Arr::get($data, $data_tag[0]) !== $data_tag[1]) {
+                            || strval(Arr::get($data, $data_tag[0])) !== $data_tag[1]) {
                             $html = str_replace($tag, str_replace('@endDataNotEquals', '', $can[1]), $html);
                         } else {
                             $html = str_replace($tag, '', $html);
