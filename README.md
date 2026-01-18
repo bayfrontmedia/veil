@@ -73,10 +73,10 @@ The following template tags can be used in HTML and view files:
 | `{{parameter.name}}`                                | Replaced with escaped value from the `$data` array in dot notation                                                     |
 | `{{!parameter.name}}`                               | Replaced with unescaped (raw) value from the `$data` array in dot notation                                             |
 | `@hasData:`                                         | Everything inside only visible if data contains key in dot notation                                                    |
-| `@hasAnyData:`                                      | Everything inside only visible if data contains at leaset one key in dot notation                                      |
+| `@hasAnyData:`                                      | Everything inside only visible if data contains at least one key in dot notation                                       |
 | `@hasAllData:`                                      | Everything inside only visible if data contains all keys in dot notation                                               |
-| `@dataEquals:`                                      | Everything inside only visible if data key in dot notation equals value                                                |
-| `@dataNotEquals:`                                   | Everything inside only visible if data key in dot notation does not equal value                                        |
+| `@dataEquals:`                                      | Everything inside only visible if data key in dot notation equals case-senstivie value                                 |
+| `@dataNotEquals:`                                   | Everything inside only visible if data key in dot notation does not equal case-sensitive value                         |
 | <code>{{parameter.name&#124;&#124;default}}</code>  | Replaced with escaped value from the `$data` array in dot notation or default value if not existing [*](#note)         |
 | <code>{{!parameter.name&#124;&#124;default}}</code> | Replaced with unescaped (raw) value from the `$data` array in dot notation or default value if not existing [*](#note) |
 
@@ -89,7 +89,7 @@ The following template tags can be used in HTML and view files:
 ```html
 @hasData:nested.key
 <p>Content only visible if data contains "nested.key".</p>
-@endhasData
+@endHasData
 
 @hasAnyData:key|nested.key
 <p>Content only visible if data contains "key" or "nested.key".</p>
@@ -100,12 +100,12 @@ The following template tags can be used in HTML and view files:
 @endHasAllData
 
 @dataEquals:nested.key|value
-<p>Content only visible if data key "nested.key" exists and has value "value".</p>
+<p>Content only visible if data key "nested.key" exists and has case-sensitive value "value".</p>
 @endDataEquals
 
 @dataNotEquals:nested.key|value
-<p>Content only visible if data key "nested.key" does not exist or does not have value "value".</p>
-@endDataEquals
+<p>Content only visible if data key "nested.key" does not exist or does not have case-sensitive value "value".</p>
+@endDataNotEquals
 ```
 
 ##### Sections

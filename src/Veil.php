@@ -388,6 +388,8 @@ class Veil
 
                 if (isset($use[1])) { // If valid @hasData syntax
 
+
+
                     $can = explode(PHP_EOL, $use[1], 2);
 
                     if (isset($can[1])) {
@@ -422,7 +424,7 @@ class Veil
 
                     if (isset($can[1])) {
 
-                        if (Arr::hasAnyValues($data, explode('|', $can[0]))) {
+                        if (!empty(Arr::only(Arr::dot($data), explode('|', $can[0])))) {
                             $html = str_replace($tag, str_replace('@endHasAnyData', '', $can[1]), $html);
                         } else {
                             $html = str_replace($tag, '', $html);
@@ -452,7 +454,7 @@ class Veil
 
                     if (isset($can[1])) {
 
-                        if (Arr::hasAllValues($data, explode('|', $can[0]))) {
+                        if (!Arr::isMissing(Arr::dot($data), explode('|', $can[0]))) {
                             $html = str_replace($tag, str_replace('@endHasAllData', '', $can[1]), $html);
                         } else {
                             $html = str_replace($tag, '', $html);
@@ -510,7 +512,7 @@ class Veil
 
                 $use = explode(':', $tag, 2);
 
-                if (isset($use[1])) { // If valid @dataNotEquals syntax
+                if (isset($use[1])) { // If valid @dataEquals syntax
 
                     $can = explode(PHP_EOL, $use[1], 2);
 
@@ -521,7 +523,7 @@ class Veil
                         if (!isset($data_tag[1])
                             || !Arr::has($data, $data_tag[0])
                             || Arr::get($data, $data_tag[0]) !== $data_tag[1]) {
-                            $html = str_replace($tag, str_replace('@dataNotEquals', '', $can[1]), $html);
+                            $html = str_replace($tag, str_replace('@endDataNotEquals', '', $can[1]), $html);
                         } else {
                             $html = str_replace($tag, '', $html);
                         }
