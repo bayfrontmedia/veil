@@ -423,7 +423,7 @@ class Veil
                     if (isset($can[1])) {
 
                         if (Arr::hasAnyValues($data, explode('|', $can[0]))) {
-                            $html = str_replace($tag, str_replace('@hasAnyData', '', $can[1]), $html);
+                            $html = str_replace($tag, str_replace('@endHasAnyData', '', $can[1]), $html);
                         } else {
                             $html = str_replace($tag, '', $html);
                         }
@@ -453,7 +453,7 @@ class Veil
                     if (isset($can[1])) {
 
                         if (Arr::hasAllValues($data, explode('|', $can[0]))) {
-                            $html = str_replace($tag, str_replace('@hasAllData', '', $can[1]), $html);
+                            $html = str_replace($tag, str_replace('@endHasAllData', '', $can[1]), $html);
                         } else {
                             $html = str_replace($tag, '', $html);
                         }
@@ -487,7 +487,7 @@ class Veil
                         if (isset($data_tag[1])
                             && Arr::has($data, $data_tag[0])
                             && Arr::get($data, $data_tag[0]) === $data_tag[1]) {
-                            $html = str_replace($tag, str_replace('@dataEquals', '', $can[1]), $html);
+                            $html = str_replace($tag, str_replace('@endDataEquals', '', $can[1]), $html);
                         } else {
                             $html = str_replace($tag, '', $html);
                         }

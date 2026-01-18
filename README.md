@@ -96,7 +96,7 @@ The following template tags can be used in HTML and view files:
 @endHasAnyData
 
 @hasAllData:key|nested.key
-<p>Content only visible if data contains "key and "nested.key".</p>
+<p>Content only visible if data contains "key" and "nested.key".</p>
 @endHasAllData
 
 @dataEquals:nested.key|value
