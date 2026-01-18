@@ -88,23 +88,23 @@ The following template tags can be used in HTML and view files:
 
 ```html
 @hasData:nested.key
-<p>Content only visible if data contains nested key.</p>
+<p>Content only visible if data contains "nested.key".</p>
 @endhasData
 
 @hasAnyData:key|nested.key
-<p>Content only visible if data contains `key` or `nested.key`.</p>
+<p>Content only visible if data contains "key" or "nested.key".</p>
 @endHasAnyData
 
 @hasAllData:key|nested.key
-<p>Content only visible if data contains `key` and `nested.key`.</p>
+<p>Content only visible if data contains "key and "nested.key".</p>
 @endHasAllData
 
 @dataEquals:nested.key|value
-<p>Content only visible if data key `nested.key` exists and has value `value`.</p>
+<p>Content only visible if data key "nested.key" exists and has value "value".</p>
 @endDataEquals
 
 @dataNotEquals:nested.key|value
-<p>Content only visible if data key `nested.key` does not exist or does not have value `value`.</p>
+<p>Content only visible if data key "nested.key" does not exist or does not have value "value".</p>
 @endDataEquals
 ```
 
